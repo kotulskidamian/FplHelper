@@ -6,12 +6,12 @@ namespace FplHelperApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PositionsControllers : ControllerBase
+    public class PositionsController : ControllerBase
     {
         private readonly IHttpClientFactory _clientFactory;
         private readonly IMapper _mapper;
 
-        public PositionsControllers(IHttpClientFactory clientFactory, IMapper mapper)
+        public PositionsController(IHttpClientFactory clientFactory, IMapper mapper)
         {
             _clientFactory = clientFactory;
             _mapper = mapper;

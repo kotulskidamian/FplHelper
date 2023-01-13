@@ -11,6 +11,7 @@ namespace FplHelperApi.Profiles
             // Source -> Target
             CreateMap<Player, PlayerReadDto>();
             CreateMap<Player, PlayerDetailsReadDto>();
+            CreateMap<Player, PlayerStatsReadDto>();
 
             CreateMap<Team, TeamReadDto>();
             CreateMap<Position, PositionReadDto>();

@@ -47,7 +47,7 @@ namespace FplHelperApi.Models{
         public string Form { get; set; }
 
         [JsonPropertyName("id")]
-        public int Id { get; set; }
+        public int PlayerId { get; set; }
 
         [JsonPropertyName("in_dreamteam")]
         public bool InDreamteam { get; set; }
