@@ -10,8 +10,12 @@ import {
 
 function* workGetPlayers() {
   try {
-    const players = yield call(getPlayers);
-    yield put(getPlayersSuccess(players));
+    const { data: players, error } = yield call(getPlayers);
+    if (players) {
+      yield put(getPlayersSuccess(players));
+    } else {
+      console.log(`error ${error.message}`);
+    }
 
     const playerDetails = yield call(getPlayerDetails);
     yield put(getPlayerDetailsSuccess(playerDetails));

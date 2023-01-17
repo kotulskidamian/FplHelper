@@ -17,14 +17,22 @@ const mergeArrays = (array1 = [], array2 = [], idName = '') => {
   return result;
 };
 
-const initialState = {};
+const initialState = {
+  players: [],
+  teams: [],
+  positions: [],
+};
 
 function rootReducer(state = initialState, action = {}) {
   switch (action.type) {
     case GET_PLAYERS_REQUEST:
       return state;
     case GET_PLAYERS_SUCCESS:
-      return action.payload;
+      return {
+        ...state.players,
+        ...state.teams,
+        players: action.payload,
+      };
     case GET_PLAYER_DETAILS_SUCCESS:
       // eslint-disable-next-line no-case-declarations
       const playersWithDetails = mergeArrays(state, action.payload, 'PlayerId');
