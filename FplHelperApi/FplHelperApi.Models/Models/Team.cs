@@ -1,6 +1,7 @@
-using System.Text.Json.Serialization; 
-namespace FplHelperApi.Models{ 
+using System.Text.Json.Serialization;
 
+namespace FplHelperApi.Models
+{
     public class Team
     {
         [JsonPropertyName("code")]

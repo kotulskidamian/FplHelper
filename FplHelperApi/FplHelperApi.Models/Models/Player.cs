@@ -1,7 +1,7 @@
-using System.Text.Json.Serialization; 
-using System; 
-namespace FplHelperApi.Models{ 
+using System.Text.Json.Serialization;
 
+namespace FplHelperApi.Models
+{
     public class Player
     {
         [JsonPropertyName("chance_of_playing_next_round")]
@@ -179,7 +179,7 @@ namespace FplHelperApi.Models{
         public string ExpectedGoalsConceded { get; set; }
 
         [JsonPropertyName("influence_rank")]
-        public int InfluenceRank { get; set; }
+        public int? InfluenceRank { get; set; }
 
         [JsonPropertyName("influence_rank_type")]
         public int InfluenceRankType { get; set; }

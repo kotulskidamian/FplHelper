@@ -1,8 +1,9 @@
-using System.Text.Json.Serialization;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
+
 namespace FplHelperApi.Models
 {
-    public class Root
+    public class RootFplResponse
     {
         [JsonPropertyName("events")]
         public List<Event> Events { get; set; }

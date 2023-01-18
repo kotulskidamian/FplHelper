@@ -1,4 +1,4 @@
-﻿namespace FplHelperApi.Dtos
+﻿namespace FplHelperApi.Models.Dtos
 {
     public class PlayerStatsReadDto
     {

@@ -1,8 +1,9 @@
-using System.Text.Json.Serialization; 
-using System.Collections.Generic; 
-using System; 
-namespace FplHelperApi.Models{ 
+using System.Text.Json.Serialization;
+using System.Collections.Generic;
+using System;
 
+namespace FplHelperApi.Models
+{
     public class Event
     {
         [JsonPropertyName("id")]

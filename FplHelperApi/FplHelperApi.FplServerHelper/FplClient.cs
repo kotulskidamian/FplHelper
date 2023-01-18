@@ -1,6 +1,6 @@
 ﻿using FplHelperApi.Models;
 using FplHelperApi.Utils;
-using System;
+using System.Net.Http.Json;
 
 namespace FplHelperApi
 {
@@ -20,7 +20,7 @@ namespace FplHelperApi
             _httpClient = _clientFactory.CreateClient(Constants.FPL_CLIENT);
         }
 
-        public async Task<Root> GetFplRootAsync()
+        public async Task<RootFplResponse> GetFplRootAsync()
         {
             var uriBuilder = new UriBuilder(_httpClient.BaseAddress)
             {
@@ -36,7 +36,7 @@ namespace FplHelperApi
             var response = await _httpClient.SendAsync(request);
             response.EnsureSuccessStatusCode();
 
-            var root = await response.Content.ReadFromJsonAsync<Root>();
+            var root = await response.Content.ReadFromJsonAsync<RootFplResponse>();
 
             return root;
         }

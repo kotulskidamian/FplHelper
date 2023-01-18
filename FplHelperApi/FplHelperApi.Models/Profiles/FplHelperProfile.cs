@@ -1,8 +1,7 @@
 ﻿using AutoMapper;
-using FplHelperApi.Dtos;
-using FplHelperApi.Models;
+using FplHelperApi.Models.Dtos;
 
-namespace FplHelperApi.Profiles
+namespace FplHelperApi.Models.Profiles
 {
     public class FplHelperProfile : Profile
     {

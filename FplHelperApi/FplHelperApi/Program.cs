@@ -1,5 +1,7 @@
-using FplHelperApi.Models;
+using AutoMapper;
+using FplHelperApi.Models.Profiles;
 using FplHelperApi.Utils;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,7 +12,11 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+var mapperConfiguration = new MapperConfiguration(cfg => cfg.AddProfile(new FplHelperProfile()));
+var mapper = mapperConfiguration.CreateMapper();
+
+builder.Services.AddSingleton(mapper);
+
 builder.Services.AddHttpClient(Constants.FPL_CLIENT, c =>
 {
     c.BaseAddress = new Uri(Constants.FPL_BASE_URL);

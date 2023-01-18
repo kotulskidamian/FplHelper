@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using FplHelperApi.Dtos;
+using FplHelperApi.Models.Dtos;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FplHelperApi.Controllers

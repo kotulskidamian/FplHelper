@@ -1,7 +1,8 @@
-using System.Text.Json.Serialization; 
-using System.Collections.Generic; 
-namespace FplHelperApi.Models{ 
+using System.Text.Json.Serialization;
+using System.Collections.Generic;
 
+namespace FplHelperApi.Models
+{
     public class GameSettings
     {
         [JsonPropertyName("league_join_private_max")]

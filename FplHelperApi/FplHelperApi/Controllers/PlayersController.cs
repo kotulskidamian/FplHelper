@@ -1,9 +1,6 @@
 ﻿using AutoMapper;
-using FplHelperApi.Dtos;
-using FplHelperApi.Models;
-using FplHelperApi.Utils;
+using FplHelperApi.Models.Dtos;
 using Microsoft.AspNetCore.Mvc;
-using FplHelperApi;
 
 namespace FplHelperApi.Controllers
 {
