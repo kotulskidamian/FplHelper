@@ -2,8 +2,9 @@
 
 namespace FplHelperApi.Messages.Contracts.GetDataFromFplServer
 {
-    public interface IGetDataFromFplServerSagaEndMsg
+    public interface IGetDataFromFplServerHandlerEndMsg
     {
+        Guid CorrelationId { get; set; }
         RootFplResponse RootFplResponse { get; set; }
     }
 }

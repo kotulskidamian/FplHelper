@@ -2,7 +2,7 @@
 
 namespace FplHelperApi.Messages.GetDataFromFplServer
 {
-    public class GetDataFromFplServerSagaStartMsg : IGetDataFromFplServerSagaStartMsg
+    public class GetDataFromFplServerHandlerStartMsg : IGetDataFromFplServerHandlerStartMsg
     {
         public Guid CorrelationId { get; set; }
     }

@@ -1,6 +1,6 @@
 ﻿namespace FplHelperApi.Messages.Contracts.GetDataFromFplServer
 {
-    public interface IGetDataFromFplServerSagaStartMsg
+    public interface IGetDataFromFplServerHandlerStartMsg
     {
         Guid CorrelationId { get; set; }
     }
