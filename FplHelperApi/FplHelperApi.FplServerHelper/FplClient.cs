@@ -1,5 +1,6 @@
 ﻿using FplHelperApi.Models;
 using FplHelperApi.Utils;
+using MongoDB.Driver;
 using System.Net.Http.Json;
 
 namespace FplHelperApi
@@ -9,18 +10,27 @@ namespace FplHelperApi
         private readonly IHttpClientFactory _clientFactory;
         private HttpClient _httpClient;
 
+        private IMongoCollection<RootFplResponse> _fplMongoCollection;
+
         public FplClient(IHttpClientFactory clientFactory)
         {
             _clientFactory = clientFactory;
             SetupClient();
+            SetupMongoDbCollection();            
         }
 
         private void SetupClient()
         {
             _httpClient = _clientFactory.CreateClient(Constants.FPL_CLIENT);
         }
+        private void SetupMongoDbCollection()
+        {
+            var client = new MongoClient("mongodb+srv://admin:admin@cluster0.07haif8.mongodb.net/?retryWrites=true&w=majority");
+            var database = client.GetDatabase("FplDatabase");
+            _fplMongoCollection = database.GetCollection<RootFplResponse>("fplData");
+        }
 
-        public async Task<RootFplResponse> GetFplRootAsync()
+        public async Task RefreshFplRootAsync()
         {
             var uriBuilder = new UriBuilder(_httpClient.BaseAddress)
             {
@@ -38,7 +48,27 @@ namespace FplHelperApi
 
             var root = await response.Content.ReadFromJsonAsync<RootFplResponse>();
 
-            return root;
+            await SaveToDatabase(root);
+        }
+
+        public async Task<RootFplResponse> GetFplRootAsync()
+        {
+            var result = await GetFplRootResponseFromMongoDb();
+            return result;
+        }
+
+        private async Task<RootFplResponse> GetFplRootResponseFromMongoDb()
+        {
+            var mongoResponse = await _fplMongoCollection.FindAsync(_ => true);
+            var result = await mongoResponse.FirstOrDefaultAsync();
+            return result;
+        }
+
+        private async Task SaveToDatabase(RootFplResponse rootFplResponse)
+        {                       
+            await _fplMongoCollection.DeleteManyAsync(_ => true);
+
+            await _fplMongoCollection.InsertOneAsync(rootFplResponse);
         }
     }
 }

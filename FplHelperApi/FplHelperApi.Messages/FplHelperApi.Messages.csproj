@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\FplHelperApi.Messages.Contracts\FplHelperApi.Messages.Contracts.csproj" />
     <ProjectReference Include="..\FplHelperApi.Models\FplHelperApi.Models.csproj" />
   </ItemGroup>
 

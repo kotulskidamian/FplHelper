@@ -1,3 +1,4 @@
+using MongoDB.Bson.Serialization.Attributes;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
@@ -5,6 +6,10 @@ namespace FplHelperApi.Models
 {
     public class RootFplResponse
     {
+        [BsonId]
+        [BsonRepresentation(MongoDB.Bson.BsonType.ObjectId)]
+        public string Id { get; set; }
+
         [JsonPropertyName("events")]
         public List<Event> Events { get; set; }
 

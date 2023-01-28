@@ -13,16 +13,16 @@ import ListItemText from '@mui/material/ListItemText';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import PlayersListWrapper from './playersList/PlayersListWrapper';
-import { getPlayersRequest as getPlayersRequestAction } from '../actions';
+import { initGetPlayers as initGetPlayersAction } from '../actions';
 
 const mdTheme = createTheme();
 
-const Dashboard = ({ getPlayersRequest }) => {
+const Dashboard = ({ initGetPlayers }) => {
   const [selectedItem, setSelectedItem] = React.useState('Players');
 
   const handleListItemClick = (event, selectedItemName) => {
     setSelectedItem(selectedItemName);
-    getPlayersRequest();
+    initGetPlayers();
   };
 
   return (
@@ -74,7 +74,7 @@ const Dashboard = ({ getPlayersRequest }) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  getPlayersRequest: () => dispatch(getPlayersRequestAction()),
+  initGetPlayers: () => dispatch(initGetPlayersAction()),
 });
 
 export default connect(null, mapDispatchToProps)(Dashboard);
