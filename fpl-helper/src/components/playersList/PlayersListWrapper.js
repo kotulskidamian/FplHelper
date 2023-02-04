@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import PlayersList from './PlayersList';
 
-// eslint-disable-next-line object-curly-newline
 const PlayersListWrapper = ({ type, players, teams, playersInMyTeam }) => (
   <>
     {type === 'Players' && <PlayersList type={type} players={players} />}
@@ -11,7 +10,7 @@ const PlayersListWrapper = ({ type, players, teams, playersInMyTeam }) => (
   </>
 );
 
-const mapStateToProps = ({ elements, teams, playersInMyTeam }) => {
+const mapStateToProps = ({ fpl, teams, playersInMyTeam }) => {
   const tempPlayersInMyTeam = [
     {
       id: 1,
@@ -24,7 +23,7 @@ const mapStateToProps = ({ elements, teams, playersInMyTeam }) => {
   ];
 
   return {
-    players: elements || [],
+    players: fpl.players || [],
     teams: teams || [],
     playersInMyTeam: playersInMyTeam || tempPlayersInMyTeam,
   };
@@ -34,11 +33,14 @@ PlayersListWrapper.propTypes = {
   type: PropTypes.string.isRequired,
   players: PropTypes.arrayOf(
     PropTypes.shape({
-      first_name: PropTypes.string.isRequired,
-      second_name: PropTypes.string.isRequired,
-      total_points: PropTypes.number.isRequired,
-      value_season: PropTypes.string.isRequired,
-      now_cost: PropTypes.number.isRequired,
+      firstName: PropTypes.string.isRequired,
+      secondName: PropTypes.string.isRequired,
+      selectedByPercent: PropTypes.string.isRequired,
+      cost: PropTypes.number.isRequired,
+      totalPoints: PropTypes.number.isRequired,
+      expectedGoals: PropTypes.string.isRequired,
+      expectedAssists: PropTypes.string.isRequired,
+      valueSeason: PropTypes.string.isRequired,
     }),
   ).isRequired,
   playersInMyTeam: PropTypes.arrayOf(

@@ -5,7 +5,7 @@ import { DataGrid } from '@mui/x-data-grid';
 
 const PAGE_SIZE = 30;
 
-const getFullName = (params) => `${params.row?.first_name || ''} ${params.row?.second_name || ''}`;
+const getFullName = params => `${params.row?.firstName || ''} ${params.row?.secondName || ''}`;
 
 const createColumn = (field, headerName, type, width, editable, valueGetter = null) => {
   let column = {
@@ -30,9 +30,12 @@ const createColumn = (field, headerName, type, width, editable, valueGetter = nu
 
 const columns = [
   createColumn('name', 'Name', 'string', 300, false, getFullName),
-  createColumn('total_points', 'Total points', 'number', 150, false),
-  createColumn('value_season', 'Value', 'string', 150, false),
-  createColumn('now_cost', 'Cost', 'number', 150, false),
+  createColumn('selectedByPercent', 'Selected %', 'string', 100, false),
+  createColumn('cost', 'Cost', 'number', 100, false),
+  createColumn('totalPoints', 'Total points', 'number', 100, false),
+  createColumn('expectedGoals', 'Expected goals', 'string', 100, false),
+  createColumn('expectedAssists', 'Expected assists', 'string', 100, false),
+  createColumn('valueSeason', 'Value', 'string', 100, false),
 ];
 
 const PlayersList = ({ type, players }) => (
@@ -44,7 +47,7 @@ const PlayersList = ({ type, players }) => (
         columns={columns}
         pageSize={PAGE_SIZE}
         rowsPerPageOptions={[PAGE_SIZE]}
-        getRowId={(player) => player.id}
+        getRowId={player => player.playerId}
         disableColumnMenu
       />
     </Box>

@@ -59,7 +59,7 @@ namespace FplHelperApi.Models
         public DateTime? NewsAdded { get; set; }
 
         [JsonPropertyName("now_cost")]
-        public int NowCost { get; set; }
+        public int Cost { get; set; }
 
         [JsonPropertyName("photo")]
         public string Photo { get; set; }

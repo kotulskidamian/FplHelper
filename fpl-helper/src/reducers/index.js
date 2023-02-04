@@ -11,8 +11,8 @@ import {
 
 const mergeArrays = (array1 = [], array2 = [], idName = '') => {
   let result = [];
-  result = array1.map((element1) => {
-    const match = array2.find((element2) => element1[idName] === element2[idName]);
+  result = array1.map(element1 => {
+    const match = array2.find(element2 => element1[idName] === element2[idName]);
     return {
       ...element1,
       ...match,
@@ -67,7 +67,7 @@ function rootReducer(state = initialState, action = {}) {
     case GET_PLAYER_DETAILS_SUCCESS:
       return {
         fpl: {
-          players: mergeArrays(state.fpl.players, action.payload, 'PlayerId'),
+          players: mergeArrays(state.fpl.players, action.payload, 'playerId'),
           teams: [...state.fpl.teams],
           positions: [...state.fpl.positions],
         },
@@ -81,7 +81,7 @@ function rootReducer(state = initialState, action = {}) {
     case GET_PLAYER_STATS_SUCCESS:
       return {
         fpl: {
-          players: mergeArrays(state.fpl.players, action.payload, 'PlayerId'),
+          players: mergeArrays(state.fpl.players, action.payload, 'playerId'),
           teams: [...state.fpl.teams],
           positions: [...state.fpl.positions],
         },

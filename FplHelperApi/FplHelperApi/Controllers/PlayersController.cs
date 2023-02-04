@@ -25,6 +25,6 @@ namespace FplHelperApi.Controllers
             var resultPlayers = _mapper.Map<IEnumerable<PlayerReadDto>>(root.Players);
 
             return Ok(resultPlayers);
-        }
+        }  
     }
 }
