@@ -4,6 +4,8 @@ import {
   getPlayers,
   getPlayerDetails,
   getPlayerStats,
+  getTeams,
+  getPositions,
   getPlayersRequest,
   getPlayersSuccess,
   getPlayersFailure,
@@ -11,29 +13,38 @@ import {
   getPlayerDetailsFailure,
   getPlayerStatsSuccess,
   getPlayerStatsFailure,
+  getTeamsSuccess,
+  getTeamsFailure,
+  getPositionsSuccess,
+  getPositionsFailure,
 } from '../actions';
 
-function* getPlayerCall(playersCall, actionSuccess, actionFailure) {
+function* baseGetCall(getCall, actionSuccess, actionFailure) {
   try {
-    const { data: result, error } = yield call(playersCall);
+    const { data: result, error } = yield call(getCall);
     if (result) {
       yield put(actionSuccess(result));
     } else {
       yield put(actionFailure(error));
     }
   } catch (e) {
-    console.log(`Exception in getPlayerCall - ${e}`);
+    console.log(`Exception in baseGetCall - ${e}`);
   }
 }
 
 function* workGetPlayers() {
   try {
     yield put(getPlayersRequest());
-    yield call(getPlayerCall, getPlayers, getPlayersSuccess, getPlayersFailure);
+    yield call(baseGetCall, getPlayers, getPlayersSuccess, getPlayersFailure);
 
     yield all([
-      call(getPlayerCall, getPlayerDetails, getPlayerDetailsSuccess, getPlayerDetailsFailure),
-      call(getPlayerCall, getPlayerStats, getPlayerStatsSuccess, getPlayerStatsFailure),
+      call(baseGetCall, getPlayerDetails, getPlayerDetailsSuccess, getPlayerDetailsFailure),
+      call(baseGetCall, getPlayerStats, getPlayerStatsSuccess, getPlayerStatsFailure),
+    ]);
+
+    yield all([
+      call(baseGetCall, getTeams, getTeamsSuccess, getTeamsFailure),
+      call(baseGetCall, getPositions, getPositionsSuccess, getPositionsFailure),
     ]);
   } catch (e) {
     console.log(`Exception in workGetPlayers - ${e}`);

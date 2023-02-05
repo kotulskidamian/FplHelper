@@ -17,63 +17,72 @@ import { initGetPlayers as initGetPlayersAction } from '../actions';
 
 const mdTheme = createTheme();
 
-const Dashboard = ({ initGetPlayers }) => {
-  const [selectedItem, setSelectedItem] = React.useState('Players');
+class Dashboard extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedItem: '',
+    };
+    this.props.initGetPlayers();
+  }
 
-  const handleListItemClick = (event, selectedItemName) => {
-    setSelectedItem(selectedItemName);
-    initGetPlayers();
+  handleListItemClick = (event, selectedItemName) => {
+    this.setState({ selectedItem: selectedItemName });
   };
 
-  return (
-    <ThemeProvider theme={mdTheme}>
-      <Box sx={{ display: 'flex' }}>
-        <List component="nav">
-          <ListItemButton
-            selected={selectedItem === 'Players'}
-            onClick={(event) => handleListItemClick(event, 'Players')}
+  render() {
+    return (
+      <ThemeProvider theme={mdTheme}>
+        <Box sx={{ display: 'flex' }}>
+          <List component="nav">
+            <ListItemButton
+              selected={this.selectedItem === 'Players'}
+              onClick={event => this.handleListItemClick(event, 'Players')}
+            >
+              <ListItemIcon>
+                <DashboardIcon />
+              </ListItemIcon>
+              <ListItemText primary="Players" />
+            </ListItemButton>
+            <ListItemButton
+              selected={this.selectedItem === 'Team'}
+              onClick={event => this.handleListItemClick(event, 'Team')}
+            >
+              <ListItemIcon>
+                <ShoppingCartIcon />
+              </ListItemIcon>
+              <ListItemText primary="Team" />
+            </ListItemButton>
+            <Divider sx={{ my: 1 }} />
+          </List>
+          <Box
+            component="main"
+            sx={{
+              backgroundColor: theme => theme.palette.grey[100],
+              flexGrow: 1,
+              height: '100vh',
+              overflow: 'auto',
+            }}
           >
-            <ListItemIcon>
-              <DashboardIcon />
-            </ListItemIcon>
-            <ListItemText primary="Players" />
-          </ListItemButton>
-          <ListItemButton
-            selected={selectedItem === 'Team'}
-            onClick={(event) => handleListItemClick(event, 'Team')}
-          >
-            <ListItemIcon>
-              <ShoppingCartIcon />
-            </ListItemIcon>
-            <ListItemText primary="Team" />
-          </ListItemButton>
-          <Divider sx={{ my: 1 }} />
-        </List>
-        <Box
-          component="main"
-          sx={{
-            backgroundColor: (theme) => theme.palette.grey[100],
-            flexGrow: 1,
-            height: '100vh',
-            overflow: 'auto',
-          }}
-        >
-          <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-            <Grid>
+            <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
               <Grid>
-                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                  <PlayersListWrapper type={selectedItem} />
-                </Paper>
+                <Grid>
+                  <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
+                    {this.state.selectedItem !== '' && (
+                      <PlayersListWrapper type={this.state.selectedItem} />
+                    )}
+                  </Paper>
+                </Grid>
               </Grid>
-            </Grid>
-          </Container>
+            </Container>
+          </Box>
         </Box>
-      </Box>
-    </ThemeProvider>
-  );
-};
+      </ThemeProvider>
+    );
+  }
+}
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   initGetPlayers: () => dispatch(initGetPlayersAction()),
 });
 

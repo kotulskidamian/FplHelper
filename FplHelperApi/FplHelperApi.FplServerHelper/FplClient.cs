@@ -68,7 +68,14 @@ namespace FplHelperApi
         {                       
             await _fplMongoCollection.DeleteManyAsync(_ => true);
 
+            rootFplResponse.Players = ClearUnusedPlayers(rootFplResponse.Players);
+
             await _fplMongoCollection.InsertOneAsync(rootFplResponse);
+        }
+
+        private IEnumerable<Player> ClearUnusedPlayers(IEnumerable<Player> players)
+        {
+            return players.Where(p => p.Starts > 0);
         }
     }
 }

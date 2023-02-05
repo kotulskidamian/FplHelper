@@ -35,12 +35,12 @@ PlayersListWrapper.propTypes = {
     PropTypes.shape({
       firstName: PropTypes.string.isRequired,
       secondName: PropTypes.string.isRequired,
-      selectedByPercent: PropTypes.string.isRequired,
+      selectedByPercent: PropTypes.number.isRequired,
       cost: PropTypes.number.isRequired,
       totalPoints: PropTypes.number.isRequired,
-      expectedGoals: PropTypes.string.isRequired,
-      expectedAssists: PropTypes.string.isRequired,
-      valueSeason: PropTypes.string.isRequired,
+      expectedGoals: PropTypes.number.isRequired,
+      expectedAssists: PropTypes.number.isRequired,
+      valueSeason: PropTypes.number.isRequired,
     }),
   ).isRequired,
   playersInMyTeam: PropTypes.arrayOf(

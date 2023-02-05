@@ -29,7 +29,9 @@ const createColumn = (field, headerName, type, width, editable, valueGetter = nu
 };
 
 const columns = [
-  createColumn('name', 'Name', 'string', 300, false, getFullName),
+  createColumn('name', 'Name', 'string', 250, false, getFullName),
+  createColumn('teamName', 'Team', 'string', 100, false),
+  createColumn('positionName', 'Position', 'string', 100, false),
   createColumn('selectedByPercent', 'Selected %', 'string', 100, false),
   createColumn('cost', 'Cost', 'number', 100, false),
   createColumn('totalPoints', 'Total points', 'number', 100, false),
@@ -41,7 +43,7 @@ const columns = [
 const PlayersList = ({ type, players }) => (
   <>
     {type}
-    <Box sx={{ height: 500, width: '100%' }}>
+    <Box sx={{ height: 650, width: '100%' }}>
       <DataGrid
         rows={players}
         columns={columns}
@@ -58,11 +60,16 @@ PlayersList.propTypes = {
   type: PropTypes.string.isRequired,
   players: PropTypes.arrayOf(
     PropTypes.shape({
-      first_name: PropTypes.string.isRequired,
-      second_name: PropTypes.string.isRequired,
-      total_points: PropTypes.number.isRequired,
-      value_season: PropTypes.string.isRequired,
-      now_cost: PropTypes.number.isRequired,
+      firstName: PropTypes.string.isRequired,
+      secondName: PropTypes.string.isRequired,
+      teamName: PropTypes.string.isRequired,
+      positionName: PropTypes.string.isRequired,
+      selectedByPercent: PropTypes.number.isRequired,
+      cost: PropTypes.number.isRequired,
+      totalPoints: PropTypes.number.isRequired,
+      expectedGoals: PropTypes.number.isRequired,
+      expectedAssists: PropTypes.number.isRequired,
+      valueSeason: PropTypes.number.isRequired,
     }),
   ).isRequired,
 };
